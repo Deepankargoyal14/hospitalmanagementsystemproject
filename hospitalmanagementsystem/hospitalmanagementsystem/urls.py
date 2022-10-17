@@ -20,4 +20,8 @@ from hospital.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homepage,name='homepage'),
+    path('about/',aboutpage,name='aboutpage'),
+    path('loginpage/',loginpage,name='loginpage'),
+    path('createaccount/',createaccountpage,name='createaccountpage1'),
+    path('createaccount/createuser/',createuser,),
 ]

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>For All Care</title>
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    </head>
+    <body>
+
+<!-- header section starts  -->
+
+        {% include 'nav.html'%}
+
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+
+        <section class="home" id="home">
+
+            <div class="image">
+                <img src="static/home-img.svg" alt="gg">
+            </div>
+
+            <div class="content">
+                <h3>stay safe, stay healthy</h3>
+                <p>Experienced doctors backed by highly skilled paramedics
+                    More than 37 year of clinical experience
+                    Best in class medical services
+                    State of the art medical technology.</p>
+                <a href="#book" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </section>
+    </body>
+</html>
