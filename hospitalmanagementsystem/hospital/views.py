@@ -3,13 +3,15 @@
 # each view function takes http request as its first parameter.
 #render is the shortcut function to return the given template.
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User,Group
-from hospital.models import Patient
+from hospital.models import Patient,LoginTable
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-from hospital.hospitalserializer import SignupSerializer
+from hospital.hospitalserializer import SignupSerializer,LoginTableSerializer
+
+
 
 
 # Create your views here.
@@ -95,9 +97,44 @@ def createuser(request):
             return HttpResponse("You are Register succesfully ")
             # return render(request, 'loginpage.html')
         else:
-            return HttpResponse('Password didnot match')
+            return HttpResponse('Somthing Went Wrong')
         # return JsonResponse(data1.data,status=status.HTTP_201_CREATED)
 
 
     else:
-        return HttpResponse('Somthing Went Wrong')
+        return HttpResponse('Password didnot match')
+
+@api_view(['GET','POST'])
+def login(request):
+    print(request.data)
+    # print(request.GET["session"])
+    # data1=LoginSerializer(data=request.data)
+
+    entemail = request.data["email"]
+    entpswd = request.data["password"]
+    data3=Patient.objects.filter(email=entemail)
+    # if Patient.objects.filter(email=entemail):
+    if data3:
+        # emdt = Patient.objects.get(email=entemail)
+
+        # if emdt.password == entpswd:
+        if data3[0].password == entpswd:
+            # enter data in LoginTable for help in logut in continue session
+            data1 = LoginTableSerializer(data=request.data)
+            if data1.is_valid():
+                data1.save()
+
+            # return HttpResponse("login successfully")
+            return render(request,"patienthome.html")
+        else:
+            return HttpResponse("entered password is wrong")
+    else:
+        return HttpResponse("email not register")
+
+    # return HttpResponse('datamatch')
+
+@api_view(['GET','POST'])
+def Logout(request):
+    print(request.data)
+    # return render(request, 'loginpage.html')
+    return redirect('loginpage')

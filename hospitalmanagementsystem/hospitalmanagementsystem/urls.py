@@ -24,4 +24,6 @@ urlpatterns = [
     path('loginpage/',loginpage,name='loginpage'),
     path('createaccount/',createaccountpage,name='createaccountpage1'),
     path('createaccount/createuser/',createuser,),
-]
+    path('loginpage/login/',login),
+
+ ]

@@ -13,3 +13,10 @@ class Patient(models.Model):
 
 	def __str__(self):
 		return self.Patient_name
+
+class LoginTable(models.Model):
+	csrfmiddlewaretoken = models.TextField(null=True)
+	email = models.EmailField(unique=True)
+
+	def __str__(self):
+		return self.email
